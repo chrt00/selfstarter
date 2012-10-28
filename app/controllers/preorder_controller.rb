@@ -21,6 +21,9 @@ class PreorderController < ApplicationController
   def postfill
     unless params[:callerReference].blank?
       @order = Order.postfill!(params)
+      @order.request_host = request.host
+      @order.settings_label = Settings.settings_label
+      @order.save!
     end
     # "A" means the user cancelled the preorder before clicking "Confirm" on Amazon Payments.
     if params['status'] != 'A' && @order.present?
