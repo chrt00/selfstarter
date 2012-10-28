@@ -6,14 +6,9 @@
   <div id="backing">
     <ul>
       <li class="stats" id="backers">
-        <%= number_with_delimiter Order.current, :delimiter => "," %>
+        <%= number_with_delimiter Order.current, :delimiter => "," %> of <%= Settings.project_goal %>
         <span><%= Settings.primary_stat %></span>
       </li>
-      <li class="stats">
-        <%= number_to_currency Order.revenue, :precision => 0 %>
-        <span>of <%= number_to_currency Settings.project_goal.to_f * Settings.price.to_f, :precision => 0 %></span>
-      </li>
-
       <% if Settings.expiration_date.present? %>
         <li class="stats" id="days">
           <%= distance_of_time_in_words_to_now(Settings.expiration_date).gsub(/\D/, "") %>
